@@ -392,7 +392,10 @@ h2.display,.display{font-family:var(--serif);font-weight:300;font-size:var(--t-h
   box-shadow:var(--shadow-warm-3);
   background:var(--ink-1);
 }
-.story__media .frame img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:contrast(1.04) saturate(.96)}
+/* let the photo's intrinsic ratio drive the height — the Coconuts source is
+   landscape 5:3, so cropping it into a tall portrait frame chopped off Pa Pim.
+   This shows the whole frame at every viewport. */
+.story__media .frame img{width:100%;height:auto;display:block;object-fit:cover;filter:contrast(1.04) saturate(.96)}
 .story__media .tape{
   position:absolute;width:90px;height:24px;background:linear-gradient(90deg,rgba(198,138,53,.85),rgba(198,138,53,.7));
   box-shadow:0 4px 10px -2px rgba(60,38,21,.25);
@@ -438,8 +441,14 @@ h2.display,.display{font-family:var(--serif);font-weight:300;font-size:var(--t-h
 .story__footnote sup{color:var(--brass-2)}
 
 @media (max-width:880px){
-  .story{grid-template-columns:1fr;gap:30px}
-  .story__media .frame img{aspect-ratio:3/4}
+  .story{grid-template-columns:1fr;gap:36px}
+  .story__media{max-width:540px;margin-left:auto;margin-right:auto}
+  /* breathing room from viewport edges so the polaroid feels framed, not crammed */
+  .story__media .tape{width:64px;height:18px}
+  .story__media .tape--tl{top:-9px;left:10%}
+  .story__media .tape--br{bottom:-7px;right:8%}
+  .story__media .label{font-size:18px;left:-4px;bottom:-22px}
+  .story__cap{margin-top:32px}
   .story__pour{display:none}
 }
 
@@ -981,7 +990,7 @@ footer{background:#0A0805;color:var(--cream-3);padding:60px var(--gutter) 36px;p
         <picture>
           <source srcset="/images/optimized/coconuts_papim_01_800.avif 800w, /images/optimized/coconuts_papim_01_1600.avif 1600w" type="image/avif">
           <source srcset="/images/optimized/coconuts_papim_01_800.webp 800w, /images/optimized/coconuts_papim_01_1600.webp 1600w" type="image/webp">
-          <img src="/images/optimized/coconuts_papim_01_1600.webp" alt="Ploenpit Rianmek (Pa Pim) brewing coffee at Mother Roaster — portrait by Coconuts Bangkok, 2019" loading="lazy" width="1600" height="2000">
+          <img src="/images/optimized/coconuts_papim_01_1600.webp" alt="Ploenpit Rianmek (Pa Pim) brewing coffee at Mother Roaster — portrait by Coconuts Bangkok, 2019" loading="lazy" width="1000" height="600">
         </picture>
       </div>
       <span class="label" aria-hidden="true">— Pa Pim, behind the ROK</span>
