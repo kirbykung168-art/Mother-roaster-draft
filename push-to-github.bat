@@ -19,7 +19,7 @@ git remote remove origin 2>nul
 git remote add origin https://github.com/kirbykung168-art/Mother-roaster-draft.git
 
 git add -A
-git commit -m "Mother Roaster - Forever / Coffee / Lover - portfolio build"
+git commit -m "Fix mobile rendering bugs (images + sections from real-device audit)"
 git push -u origin main --force
 
 echo.

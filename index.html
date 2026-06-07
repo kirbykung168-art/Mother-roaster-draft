@@ -468,10 +468,13 @@ h2.display,.display{font-family:var(--serif);font-weight:300;font-size:var(--t-h
   font-variation-settings:"opsz" 144,"SOFT" 0;
   position:relative;
   background:linear-gradient(180deg,#F1E3CB 0%,#E8A24C 60%,#C68A35 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
 }
 .tagline__words .w{display:block;overflow:hidden;position:relative}
-.tagline__words .w span{display:block;transform:translateY(105%);transition:transform 1.1s cubic-bezier(.2,.65,.2,1)}
+/* default state — text visible. JS adds .js-armed to enable the slide-in animation. */
+.tagline__words .w span{display:block;transition:transform 1.1s cubic-bezier(.2,.65,.2,1)}
+.tagline.js-armed .tagline__words .w span{transform:translateY(105%)}
 .tagline.is-in .tagline__words .w span{transform:translateY(0)}
 .tagline.is-in .tagline__words .w:nth-child(2) span{transition-delay:.15s}
 .tagline.is-in .tagline__words .w:nth-child(3) span{transition-delay:.3s}
@@ -533,6 +536,10 @@ h2.display,.display{font-family:var(--serif);font-weight:300;font-size:var(--t-h
 
 @media (max-width:780px){
   .reveal__head,.reveal__copy{grid-template-columns:1fr;gap:24px}
+  .reveal__pair{grid-template-columns:1fr;gap:18px}
+  .reveal__cell{aspect-ratio:5/4}
+  .reveal__cell::before{font-size:9px;padding:7px 12px;letter-spacing:.18em}
+  .reveal__cell .cap{font-size:13px;left:14px;right:14px;bottom:12px}
 }
 
 /* ─────── MENU AS RECEIPT ─────── */
@@ -1469,11 +1476,26 @@ footer{background:#0A0805;color:var(--cream-3);padding:60px var(--gutter) 36px;p
   };
   document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
-  // tagline intersection
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
-  }, {threshold:.22});
-  document.querySelectorAll('.tagline').forEach(el=>io.observe(el));
+  // tagline intersection — arm the animation (slide letters off-screen below) only
+  // once we're sure JS is running, then observe to play it. If the IO never fires
+  // (e.g. tagline already in view on load, or scrolled past too fast), reveal anyway.
+  const taglines = document.querySelectorAll('.tagline');
+  if (taglines.length && !prm) {
+    taglines.forEach(el => el.classList.add('js-armed'));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, {threshold:.05, rootMargin:'0px 0px -10% 0px'});
+    taglines.forEach(el => {
+      io.observe(el);
+      // safety: if the section was already in view on first frame, reveal immediately
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('is-in');
+    });
+    // belt-and-braces fallback: reveal after 2.4s no matter what
+    setTimeout(()=> taglines.forEach(el => el.classList.add('is-in')), 2400);
+  } else {
+    taglines.forEach(el => el.classList.add('is-in'));
+  }
 
   // number tickers
   const numIo = new IntersectionObserver((entries)=>{
