@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E0B07">
+<title>This room doesn&rsquo;t exist — Mother Roaster</title>
+<meta name="description" content="We couldn&rsquo;t roast that page. Find your way back to the four rooms.">
+<link rel="icon" href="/public/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&family=Caveat:wght@500&display=swap">
+<style>
+:root{
+  --ink-1:#0E0B07;--cream-1:#FBF6EA;--cream-3:#F1E3CB;
+  --brass-1:#E8A24C;--brass-2:#C68A35;--cinnabar:#9C3E1F;
+  --mortar:#6B6660;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Inter',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --hand:'Caveat',cursive;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%}
+body{
+  font-family:var(--sans);background:var(--ink-1);color:var(--cream-1);
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:40px 24px;
+  background-image:
+    radial-gradient(at 12% 8%,rgba(198,138,53,.12) 0,transparent 50%),
+    radial-gradient(at 88% 92%,rgba(156,62,31,.1) 0,transparent 50%);
+}
+.box{max-width:640px}
+.mark{
+  width:54px;height:54px;border-radius:50%;background:var(--cream-1);
+  display:grid;place-items:center;margin:0 auto 30px;
+  font-family:var(--serif);font-style:italic;font-weight:700;color:var(--ink-1);font-size:18px;
+}
+.code{font-family:var(--mono);font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:var(--brass-1);margin:0 0 18px}
+h1{font-family:var(--serif);font-weight:300;font-size:clamp(36px,7vw,72px);line-height:1.02;letter-spacing:-.02em;margin:0;font-variation-settings:"opsz" 144}
+h1 em{font-style:italic;color:var(--brass-1);font-weight:400}
+p{font-size:17px;line-height:1.6;color:rgba(241,227,203,.78);max-width:46ch;margin:24px auto 0}
+.hand{font-family:var(--hand);color:var(--brass-1);font-size:22px;margin-top:20px}
+.cta{margin-top:40px;display:inline-flex;align-items:center;gap:12px;padding:14px 26px;border:1px solid var(--brass-1);color:var(--cream-1);font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;border-radius:999px;text-decoration:none;transition:background .25s,color .25s,transform .25s}
+.cta:hover{background:var(--brass-2);color:var(--ink-1);transform:translateY(-2px)}
+.cta::after{content:"→";font-family:var(--serif);font-size:16px}
+.rooms{margin-top:50px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mortar)}
+.rooms a{color:var(--cream-3);border-bottom:1px solid transparent;padding-bottom:2px;text-decoration:none;transition:border-color .2s,color .2s}
+.rooms a:hover{border-bottom-color:var(--brass-1);color:var(--brass-1)}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="mark">MR</div>
+  <p class="code">404 · room not found</p>
+  <h1>This room <em>doesn&rsquo;t exist.</em></h1>
+  <p>We couldn&rsquo;t roast that page. Pa Pim only knows four — and they&rsquo;re all still open.</p>
+  <p class="hand">try the wooden stairs instead.</p>
+  <a class="cta" href="/">Back to the bar</a>
+  <div class="rooms">
+    <a href="/#room-tn">Talad Noi</a>
+    <a href="/#room-pp">Pratu Phi</a>
+    <a href="/#room-st">Sutthisan</a>
+    <a href="/#room-sw">Songwat</a>
+  </div>
+</div>
+</body>
+</html>
